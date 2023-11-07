@@ -1,7 +1,7 @@
 --- EPIC CHICKEN ---
 
-![chickenRun1](https://github.com/rbnmDev/epicChicken/assets/134232975/3aadee61-93b1-47b1-ad25-d3076e73fce5)
-run run chicken run!!
+run run chicken run!! ![chickenRun1](https://github.com/rbnmDev/epicChicken/assets/134232975/3aadee61-93b1-47b1-ad25-d3076e73fce5)
+
 
 Epic Chicken es un juego en HTML que hereda las mecánicas del clasico juego del dinosaurio de Google Chrome.
 
