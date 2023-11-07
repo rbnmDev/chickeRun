@@ -15,11 +15,28 @@ body {
     width: 920px;
     height: 280px;
     margin: 0 auto;
+
     position: relative;
-    background: linear-gradient(#4cebfc, #ffaf81);
+
+    background: linear-gradient(#40d0f0, transparent) #ffe2d1;/*linear-gradient(#90ebff, white);*/
+    transition: background-color 1s linear;
+    overflow: hidden;
 }
 
-.chicken{
+
+.mediodia {
+    background-color: #ffdcf3;
+}
+
+.tarde {
+    background-color: #ffadad;
+}
+
+.noche {
+    background-color: #aca8c7;
+}
+
+.chicken {
     width: 50px;
     height: 50px;
 
@@ -44,6 +61,7 @@ body {
 .suelo {
     width: 200%;
     height: 42px;
+
 
     position: absolute;
     bottom: 0;
@@ -74,6 +92,7 @@ body {
     0% {
         background-position-x: -51px;
     }
+
     100% {
         background-position-x: -153px;
     }

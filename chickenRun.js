@@ -1,28 +1,54 @@
 // Epic Chicken!
 
 
-const sueloY = 22;
-const velY = 0;
-const impulso = 900;
-const gravedad = 2500;
+let time = new Date();
+let deltaTime = 0;
 
-const chickePosX = 75;
-const chickePosY = sueloY;
+if(document.readyState === "complete" || document.readyState === "interactive"){
+    setTimeout(Init, 1);
+}else{
+    document.addEventListener("DOMContentLoaded", Init); 
+}
 
-const sueloX = 0;
-const velEscenario = 1280/3;
-const gameVel = 1;
+function Init(){
+    time = new Date();
+    Start();
+    Loop();
+}
+
+function Loop(){
+    deltaTime = (new Date() - time) / 1000;
+    time = new Date();
+    Update();
+    requestAnimationFrame(Loop);
+}
+
+// Lógicas del juego
+
+let sueloY = 22;
+let velY = 0;
+let impulso = 900;
+let gravedad = 2500;
+
+let chickenPosX = 75; 
+let chickenPosY = sueloY;
+
+let sueloX = 0;
+let velEscenario = 1280/3;
+let gameVel = 1;
 
 let score = 0;
 
 let parado = false;
 let saltando = false;
 
-const contenedor;
-const chicken;
-const textoScore;
-const suelo;
-const gameOver;
+let contenedor;
+let chicken;
+let textoScore;
+let suelo;
+let gameOver;
+
+
 
 function Start() {
     gameOver = document.querySelector(".game-over");
@@ -39,12 +65,12 @@ function Update() {
     MoverSuelo();
 }
 
-function MoverSuelo() {
+function MoverSuelo(){
     sueloX += CalcularDesplazamiento();
     suelo.style.left = -(sueloX % contenedor.clientWidth) + "px";
 }
 
-function CalcularDesplazamiento() {
+function CalcularDesplazamiento(){
     return velEscenario * deltaTime * gameVel;
 
 }
