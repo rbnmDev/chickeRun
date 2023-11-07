@@ -37,8 +37,8 @@ body {
 }
 
 .chicken {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 48px;
 
     position: absolute;
     bottom: 22px;
@@ -46,11 +46,11 @@ body {
     z-index: 2;
 
     background: url("img/chicken.png") repeat-x 0px 0px;
-    background-size: 204px 48px;
-    background-position-x: 0px;
+    background-size: 216px 48px;
+    background-position-x: 20px;
 }
 
-.chicken–running {
+.chicken-running {
     animation: animarChicken 0.25s steps(2) infinite;
 }
 
@@ -68,7 +68,7 @@ body {
     left: 0;
 
     background: url("img/suelo.png") repeat-x 0px 0px;
-    background-size: 50px 42px;
+    background-size: 50% 42px;
 }
 
 .score {
@@ -90,10 +90,10 @@ body {
 
 @keyframes animarChicken {
     0% {
-        background-position-x: -51px;
+        background-position-x: -55px;
     }
 
     100% {
-        background-position-x: -153px;
+        background-position-x: -165px;
     }
 }
