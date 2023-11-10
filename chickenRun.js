@@ -1,36 +1,11 @@
 // Epic Chicken!
 
-let time = new Date();
-let deltaTime = 0;
+// Variables
 
-if (
-	document.readyState === "complete" ||
-	document.readyState === "interactive"
-) {
-	setTimeout(Init, 1);
-} else {
-	document.addEventListener("DOMContentLoaded", Init);
-}
-
-function Init() {
-	time = new Date();
-	Start();
-	Loop();
-}
-
-function Loop() {
-	deltaTime = (new Date() - time) / 1000;
-	time = new Date();
-	Update();
-	requestAnimationFrame(Loop);
-}
-
-// Lógicas del juego
-
-let sueloY = 22;
+let sueloY = 32;
 let velY = 0;
-let impulso = 1500;
-let gravedad = 4500;
+let impulso = 1400;
+let gravedad = 4400;
 
 let chickenPosX = 125;
 let chickenPosY = sueloY;
@@ -62,16 +37,48 @@ let chicken;
 let textoScore;
 let suelo;
 let gameOver;
+let gameOverText;
+
+// Configuración del bucle
+
+let time = new Date();
+let deltaTime = 0;
+
+if (
+	document.readyState === "complete" ||
+	document.readyState === "interactive"
+) {
+	setTimeout(Init, 1);
+} else {
+	document.addEventListener("DOMContentLoaded", Init);
+}
+
+function Init() {
+	time = new Date();
+	Start();
+	Loop();
+}
+
+function Loop() {
+	deltaTime = (new Date() - time) / 1000;
+	time = new Date();
+	Update();
+	requestAnimationFrame(Loop);
+}
+
+// Lógicas del juego
 
 function Start() {
 	gameOver = document.querySelector(".game-over");
+	gameOverText = document.querySelector(".game-over-text");
 	suelo = document.querySelector(".suelo");
 	contenedor = document.querySelector(".contenedor");
 	textoScore = document.querySelector(".score");
 	chicken = document.querySelector(".chicken");
 	document.addEventListener("keydown", HandleKeyDown);
-    document.querySelector(".game-over").addEventListener("click", reiniciarJuego);
-
+	document
+		.querySelector(".game-over")
+		.addEventListener("click", reiniciarJuego);
 }
 
 function Update() {
@@ -93,7 +100,6 @@ function HandleKeyDown(ev) {
 		Saltar();
 	}
 }
-
 
 function Saltar() {
 	if (chickenPosY === sueloY) {
@@ -149,7 +155,7 @@ function DecidirCrearNubes() {
 	}
 }
 
-function CrearObstaculo() {
+/* function CrearObstaculo() {
 	let obstaculo = document.createElement("div");
 	contenedor.appendChild(obstaculo);
 	obstaculo.classList.add("cactus");
@@ -158,6 +164,37 @@ function CrearObstaculo() {
 	obstaculo.style.left = contenedor.clientWidth + "px";
 
 	obstaculos.push(obstaculo);
+	tiempoHastaObstaculo =
+		tiempoObstaculoMin +
+		(Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin)) / gameVel;
+} */
+
+function CrearObstaculo() {
+	let obstaculo = document.createElement("div");
+	contenedor.appendChild(obstaculo);
+
+	// Lista de clases de obstáculos
+	const clasesObstaculos = [
+		"obstaculoGrill",
+		"obstaculoPlanta",
+		"obstaculoFuego",
+		"obstaculoGodzilla",
+		"obstaculoBarril",
+		"obstaculoDino",
+		"obstaculoBender",
+		"obstaculoNelson",
+	];
+
+	// Selecciona aleatoriamente una clase de la lista
+	const claseSeleccionada =
+		clasesObstaculos[Math.floor(Math.random() * clasesObstaculos.length)];
+	console.log(claseSeleccionada);
+	obstaculo.classList.add(claseSeleccionada);
+	obstaculo.posX = window.innerWidth;
+	obstaculo.style.left = window.innerWidth + "px";
+
+	obstaculos.push(obstaculo);
+
 	tiempoHastaObstaculo =
 		tiempoObstaculoMin +
 		(Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin)) / gameVel;
@@ -204,22 +241,46 @@ function MoverNubes() {
 function GanarPuntos() {
 	score++;
 	textoScore.innerText = score;
-	if (score == 5) {
-		gameVel = 1.5;
+	if (score == 0) {
+		gameVel = 1.25;
+		contenedor.classList.add("morning");
+	} else if (score == 5) {
+		gameVel = 1.25;
 		contenedor.classList.add("mediodia");
 	} else if (score == 10) {
-		gameVel = 2;
+		gameVel = 1.5;
 		contenedor.classList.add("tarde");
-	} else if (score == 20) {
-		gameVel = 3;
+	} else if (score == 15) {
+		gameVel = 1.5;
 		contenedor.classList.add("noche");
+	} else if (score == 22) {
+		gameVel = 2;
+		contenedor.classList.remove("noche", "tarde", "mediodia");
+	} else if (score == 30) {
+		gameVel = 2.5;
+		contenedor.classList.add("mediodia");
+	} else if (score == 37) {
+		gameVel = 3;
+		contenedor.classList.add("tarde");
+	} else if (score == 45) {
+		gameVel = 3.5;
+		contenedor.classList.add("noche");
+	} else if (score == 60) {
+		gameVel = 4;
+		contenedor.classList.remove("noche", "tarde", "mediodia");
+	} else if (score == 80) {
+		gameVel = 6;
+		contenedor.classList.add("mediodia");
 	}
-	suelo.style.animationDuration = 3 / gameVel + "s";
+		suelo.style.animationDuration = 3 / gameVel + "s";
 }
 
 function GameOver() {
 	Estrellarse();
 	gameOver.style.display = "block";
+	gameOver.classList.add("mostrar");
+	gameOverText.style.display = "block";
+	gameOverText.classList.add("mostrar");
 }
 
 function DetectarColision() {
@@ -253,8 +314,6 @@ function IsCollision(
 		aRect.left + paddingLeft > bRect.left + bRect.width
 	);
 }
-
-document.getElementById("reiniciar").addEventListener("click", reiniciarJuego);
 
 function reiniciarJuego() {
 	location.reload();
