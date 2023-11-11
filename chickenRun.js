@@ -39,6 +39,17 @@ let suelo;
 let gameOver;
 let gameReload;
 
+const audio = document.getElementById("chicken-sound");
+function reproducirMusica() {
+	audio.play();
+}
+function pausarMusica() {
+	audio.pause();
+}
+document.getElementById("boton-Reproducir").addEventListener("click", reproducirMusica);
+
+
+
 // Configuración del bucle
 
 let time = new Date();
@@ -48,7 +59,7 @@ if (
 	document.readyState === "complete" ||
 	document.readyState === "interactive"
 ) {
-	setTimeout(Init, 1);
+	setTimeout(Init, 100000);
 } else {
 	document.addEventListener("DOMContentLoaded", Init);
 }
@@ -96,7 +107,8 @@ function Update() {
 function HandleSpaceDown(ev) {
 	let keyValue = ev.key;
 	let codeValue = ev.code;
-	console.log("keyValue: " + keyValue + " codeValue: " + codeValue + " ------------Jump!!"
+	console.log(
+		"keyValue: " + keyValue + " codeValue: " + codeValue + " ------------Jump!!"
 	);
 	if (ev.keyCode == 32) {
 		if (parado) {

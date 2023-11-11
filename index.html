@@ -4,23 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="img/chickenRun1.png" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/chickenRun1.png"/>
     <title>Epic Chicken!</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="/styles/inicio.css">
 </head>
 
 <body>
+    <audio id="chicken-sound" loop>
+        <source src="/assets/sounds/PhillipGross.mp3" type="audio/mp3">
+    </audio>
+
     <div class="contenedor">
         <div class="suelo"></div>
         <div class="chicken chicken-running"></div>
         <div class="scoreContainer">
+
             <div class="score">0</div>
+
+            <button id="boton-Reproducir" onclick="pausarMusica()">Mute Music</button>
+
         </div>
     </div>
     <div class="game-over">
         <div class="gameover-container">
             <h3 class="game-over-text">Game Over</h3>
-            <button type="button" name="reloadButton" class="game-reload" onkeypress="GameReload()">More chicken? </button>
+            <button type="button" name="reloadButton" class="game-reload" onkeypress="GameReload()">More chicken?
+            </button>
             <h5>or Push jump button to play again</h5>
         </div>
     </div>

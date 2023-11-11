@@ -57,7 +57,7 @@ body {
     bottom: 16px;
     left: 100px;
     z-index: 10;
-    background: url("img/chicken.png") repeat-x 0px 0px;
+    background: url("/assets/img/chicken.png") repeat-x 0px 0px;
     background-size: 216px 48px;
     background-position-x: 0px;
 }
@@ -86,7 +86,7 @@ body {
     position: absolute;
     bottom: -2px;
     left: 0;
-    background: url("img/suelo.png") repeat-x 0px 0px;
+    background: url("/assets/img/suelo.png") repeat-x 0px 0px;
     background-size: 50% 42px;
 }
 
@@ -97,7 +97,7 @@ body {
     bottom: 35px;
     left: 600px;
     z-index: 1;
-    background: url("img/obstaculoBbq.gif") no-repeat;
+    background: url("/assets/img/obstaculoBbq.gif") no-repeat;
     background-size: contain;
 }
 
@@ -108,7 +108,7 @@ body {
     bottom: 35px;
     left: 600px;
     z-index: 1;
-    background: url("img/obstaculoRodillo.gif") no-repeat;
+    background: url("/assets/img/obstaculoRodillo.gif") no-repeat;
     background-size: contain;
 }
 
@@ -119,7 +119,7 @@ body {
     bottom: 35px;
     left: 600px;
     z-index: 1;
-    background: url("img/obstaculoDientes.gif") no-repeat;
+    background: url("/assets/img/obstaculoDientes.gif") no-repeat;
     background-size: contain;
 }
 
@@ -130,7 +130,7 @@ body {
     bottom: 35px;
     left: 600px;
     z-index: 1;
-    background: url("img/obstaculoGodzilla.png") no-repeat;
+    background: url("/assets/img/obstaculoGodzilla.png") no-repeat;
     background-size: contain;
 }
 
@@ -139,7 +139,7 @@ body {
     height: 26px;
     position: absolute;
     z-index: 0;
-    background: url("img/nube.png") no-repeat;
+    background: url("/assets/img/nube.png") no-repeat;
     background-size: 92px 26px;
 }
 
