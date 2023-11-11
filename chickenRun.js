@@ -37,7 +37,7 @@ let chicken;
 let textoScore;
 let suelo;
 let gameOver;
-let gameOverText;
+let gameReload;
 
 // Configuración del bucle
 
@@ -69,16 +69,14 @@ function Loop() {
 // Lógicas del juego
 
 function Start() {
-	gameOver = document.querySelector(".game-over");
-	gameOverText = document.querySelector(".game-over-text");
 	suelo = document.querySelector(".suelo");
 	contenedor = document.querySelector(".contenedor");
 	textoScore = document.querySelector(".score");
 	chicken = document.querySelector(".chicken");
-	document.addEventListener("keydown", HandleKeyDown);
-	document
-		.querySelector(".game-over")
-		.addEventListener("click", reiniciarJuego);
+	document.addEventListener("keydown", HandleSpaceDown); // Keydown para salto
+	gameOver = document.querySelector(".game-over");
+	gameReload = document.querySelector(".game-reload");
+	gameReload.addEventListener("click", GameReload);
 }
 
 function Update() {
@@ -95,9 +93,17 @@ function Update() {
 	velY -= gravedad * deltaTime;
 }
 
-function HandleKeyDown(ev) {
+function HandleSpaceDown(ev) {
+	let keyValue = ev.key;
+	let codeValue = ev.code;
+	console.log("keyValue: " + keyValue + " codeValue: " + codeValue + " ------------Jump!!"
+	);
 	if (ev.keyCode == 32) {
-		Saltar();
+		if (parado) {
+			GameReload();
+		} else {
+			Saltar();
+		}
 	}
 }
 
@@ -175,14 +181,16 @@ function CrearObstaculo() {
 
 	// Lista de clases de obstáculos
 	const clasesObstaculos = [
-		"obstaculoGrill",
-		"obstaculoPlanta",
-		"obstaculoFuego",
+		"obstaculoBbq",
+		"obstaculoRodillo",
+		"obstaculoDientes",
+		"obstaculoBbq",
+		"obstaculoRodillo",
+		"obstaculoDientes",
+		"obstaculoBbq",
+		"obstaculoRodillo",
+		"obstaculoDientes",
 		"obstaculoGodzilla",
-		"obstaculoBarril",
-		"obstaculoDino",
-		"obstaculoBender",
-		"obstaculoNelson",
 	];
 
 	// Selecciona aleatoriamente una clase de la lista
@@ -243,7 +251,6 @@ function GanarPuntos() {
 	textoScore.innerText = score;
 	if (score == 0) {
 		gameVel = 1.25;
-		contenedor.classList.add("morning");
 	} else if (score == 5) {
 		gameVel = 1.25;
 		contenedor.classList.add("mediodia");
@@ -269,18 +276,16 @@ function GanarPuntos() {
 		gameVel = 4;
 		contenedor.classList.remove("noche", "tarde", "mediodia");
 	} else if (score == 80) {
-		gameVel = 6;
+		gameVel = 5;
 		contenedor.classList.add("mediodia");
 	}
-		suelo.style.animationDuration = 3 / gameVel + "s";
+	suelo.style.animationDuration = 3 / gameVel + "s";
 }
 
 function GameOver() {
 	Estrellarse();
 	gameOver.style.display = "block";
-	gameOver.classList.add("mostrar");
-	gameOverText.style.display = "block";
-	gameOverText.classList.add("mostrar");
+	gameReload.style.display = "block";
 }
 
 function DetectarColision() {
@@ -315,6 +320,6 @@ function IsCollision(
 	);
 }
 
-function reiniciarJuego() {
+function GameReload() {
 	location.reload();
 }
