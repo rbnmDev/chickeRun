@@ -39,29 +39,47 @@ let suelo;
 let gameOver;
 let gameReload;
 
-const audio = document.getElementById("chicken-sound");
-function reproducirMusica() {
-	audio.play();
-}
-function pausarMusica() {
-	audio.pause();
-}
-document.getElementById("boton-Reproducir").addEventListener("click", reproducirMusica);
+let pantallaInicio;
+let botonInicio;
 
+// Configuración de estado de inicio
 
+let startGame = false;
 
-// Configuración del bucle
+// Configuración del bucle y condicionales de pantallas de inicio
 
 let time = new Date();
 let deltaTime = 0;
 
-if (
-	document.readyState === "complete" ||
-	document.readyState === "interactive"
-) {
-	setTimeout(Init, 100000);
-} else {
-	document.addEventListener("DOMContentLoaded", Init);
+document.addEventListener("DOMContentLoaded", function () {
+	pantallaInicio = document.querySelector(".start-screen");
+	botonInicio = document.querySelector(".start-button");
+	contenedor = document.querySelector(".contenedor");
+
+	botonInicio.addEventListener("click", function () {
+		startGame = true;
+		GameStart();
+	});
+
+	if (
+		document.readyState === "complete" ||
+		document.readyState === "interactive"
+	) {
+		setTimeout(GameStart, 1);
+	}
+});
+
+function GameStart() {
+	if (startGame === false) {
+		pantallaInicio.style.display = "block";
+		pantallaInicio.style.position = "absolute";
+		parado = true;
+	} else {
+		pantallaInicio.style.display = "none";
+		contenedor.style.display = "block";
+		parado = false;
+		Init();
+	}
 }
 
 function Init() {
@@ -77,7 +95,7 @@ function Loop() {
 	requestAnimationFrame(Loop);
 }
 
-// Lógicas del juego
+// Lógicas de inicio del juego
 
 function Start() {
 	suelo = document.querySelector(".suelo");
@@ -104,6 +122,19 @@ function Update() {
 	velY -= gravedad * deltaTime;
 }
 
+// Configuración del audio PENDIENTE
+
+const audio = document.getElementById("chicken-sound");
+function reproducirMusica() {
+	audio.play();
+}
+function pausarMusica() {
+	audio.pause();
+}
+document.getElementById("boton-Mute").addEventListener("click", pausarMusica);
+
+// Lógicas de funciones del juego
+
 function HandleSpaceDown(ev) {
 	let keyValue = ev.key;
 	let codeValue = ev.code;
@@ -112,6 +143,8 @@ function HandleSpaceDown(ev) {
 	);
 	if (ev.keyCode == 32) {
 		if (parado) {
+			GameReload();
+		} else if (pantallaInicio) {
 			GameReload();
 		} else {
 			Saltar();
@@ -151,12 +184,6 @@ function MoverSuelo() {
 
 function CalcularDesplazamiento() {
 	return velEscenario * deltaTime * gameVel;
-}
-
-function Estrellarse() {
-	chicken.classList.remove("chicken-running");
-	chicken.classList.add("chicken-estrellado");
-	parado = true;
 }
 
 function DecidirCrearObstaculos() {
@@ -208,8 +235,8 @@ function CrearObstaculo() {
 	// Selecciona aleatoriamente una clase de la lista
 	const claseSeleccionada =
 		clasesObstaculos[Math.floor(Math.random() * clasesObstaculos.length)];
-	console.log(claseSeleccionada);
 	obstaculo.classList.add(claseSeleccionada);
+	console.log(claseSeleccionada);
 	obstaculo.posX = window.innerWidth;
 	obstaculo.style.left = window.innerWidth + "px";
 
@@ -260,17 +287,18 @@ function MoverNubes() {
 
 function GanarPuntos() {
 	score++;
+	console.log(score);
 	textoScore.innerText = score;
 	if (score == 0) {
 		gameVel = 1.25;
 	} else if (score == 5) {
-		gameVel = 1.25;
+		gameVel = 1.37;
 		contenedor.classList.add("mediodia");
 	} else if (score == 10) {
 		gameVel = 1.5;
 		contenedor.classList.add("tarde");
 	} else if (score == 15) {
-		gameVel = 1.5;
+		gameVel = 1.75;
 		contenedor.classList.add("noche");
 	} else if (score == 22) {
 		gameVel = 2;
@@ -296,8 +324,18 @@ function GanarPuntos() {
 
 function GameOver() {
 	Estrellarse();
+
 	gameOver.style.display = "block";
 	gameReload.style.display = "block";
+	if (Estrellarse() === true) {
+		console.log("GameOver");
+	}
+}
+
+function Estrellarse() {
+	chicken.classList.remove("chicken-running");
+	chicken.classList.add("chicken-estrellado");
+	parado = true;
 }
 
 function DetectarColision() {
