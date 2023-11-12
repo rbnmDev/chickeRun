@@ -144,8 +144,6 @@ function HandleSpaceDown(ev) {
 	if (ev.keyCode == 32) {
 		if (parado) {
 			GameReload();
-		} else if (pantallaInicio) {
-			GameReload();
 		} else {
 			Saltar();
 		}
@@ -345,7 +343,8 @@ function DetectarColision() {
 			break; //al estar en orden, no puede chocar con más
 		} else {
 			if (IsCollision(chicken, obstaculos[i], 10, 30, 15, 20)) {
-				GameOver();
+				GameOver()
+				pausarMusica();
 			}
 		}
 	}
@@ -371,5 +370,5 @@ function IsCollision(
 }
 
 function GameReload() {
-	location.reload();
+	Init();
 }
