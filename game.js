@@ -34,13 +34,17 @@ let velNube = 0.5;
 
 let contenedor;
 let chicken;
-let textoScore;
 let suelo;
-let gameOver;
-let gameReload;
+
+let epicBanner;
+let textoScore;
+let muteButton;
 
 let pantallaInicio;
 let botonInicio;
+
+let gameOver;
+let gameReload;
 
 // Configuración de estado de inicio
 
@@ -56,10 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	botonInicio = document.querySelector(".start-button");
 	contenedor = document.querySelector(".contenedor");
 
-	botonInicio.addEventListener("click", function () {
+
+	function iniciarJuego() {
 		startGame = true;
 		GameStart();
-	});
+	}
+
+	botonInicio.addEventListener("click", iniciarJuego);
 
 	if (
 		document.readyState === "complete" ||
@@ -67,25 +74,44 @@ document.addEventListener("DOMContentLoaded", function () {
 	) {
 		setTimeout(GameStart, 1);
 	}
-});
+
+	document.addEventListener("keydown", function (event) {
+		if (event.keyCode === 32) {
+			if (startGame === false) {
+				iniciarJuego();
+			}
+		}
+	});
+}); 
 
 function GameStart() {
 	if (startGame === false) {
 		pantallaInicio.style.display = "block";
 		pantallaInicio.style.position = "absolute";
+		textoScore = document.querySelector(".score");
+		textoScore.style.display = "none";
+		epicBanner = document.querySelector(".epic-banner");
+		epicBanner.style.display = "none";
+		chicken = document.querySelector(".chicken");
+		chicken.style.display = "none";
+
 		parado = true;
 	} else {
-		pantallaInicio.style.display = "none";
-		contenedor.style.display = "block";
-		parado = false;
 		Init();
 	}
 }
 
 function Init() {
+	pantallaInicio.style.display = "none";
+	contenedor.style.display = "block";
+
+	startGame = true;
+	parado = false;
 	time = new Date();
 	Start();
 	Loop();
+
+	console.log("Init called");
 }
 
 function Loop() {
@@ -101,11 +127,22 @@ function Start() {
 	suelo = document.querySelector(".suelo");
 	contenedor = document.querySelector(".contenedor");
 	textoScore = document.querySelector(".score");
+	textoScore.style.display = "block";
+	epicBanner = document.querySelector(".epic-banner");
+	epicBanner.style.display = "block";
 	chicken = document.querySelector(".chicken");
+	chicken.classList.remove("chicken-estrellado");
+	chicken.classList.add("chicken-running");
+	chicken.style.display = "block";
 	document.addEventListener("keydown", HandleSpaceDown); // Keydown para salto
 	gameOver = document.querySelector(".game-over");
 	gameReload = document.querySelector(".game-reload");
 	gameReload.addEventListener("click", GameReload);
+	muteButton = document.querySelector("#boton-Mute");
+	muteButton.style.display = "block";
+	reproducirMusica();
+
+	console.log("Start called");
 }
 
 function Update() {
@@ -122,10 +159,11 @@ function Update() {
 	velY -= gravedad * deltaTime;
 }
 
-// Configuración del audio PENDIENTE
+// Configuración del audio
 
 const audio = document.getElementById("chicken-sound");
 function reproducirMusica() {
+	audio.volume = 0.25;
 	audio.play();
 }
 function pausarMusica() {
@@ -138,15 +176,15 @@ document.getElementById("boton-Mute").addEventListener("click", pausarMusica);
 function HandleSpaceDown(ev) {
 	let keyValue = ev.key;
 	let codeValue = ev.code;
-	console.log(
-		"keyValue: " + keyValue + " codeValue: " + codeValue + " ------------Jump!!"
-	);
 	if (ev.keyCode == 32) {
-		if (parado) {
-			GameReload();
-		} else {
-			Saltar();
-		}
+		Saltar();
+		console.log(
+			"keyValue: " +
+				keyValue +
+				" codeValue: " +
+				codeValue +
+				" ------------Jump!!"
+		);
 	}
 }
 
@@ -246,16 +284,20 @@ function CrearObstaculo() {
 }
 
 function CrearNube() {
-	let nube = document.createElement("div");
-	contenedor.appendChild(nube);
-	nube.classList.add("nube");
-	nube.posX = contenedor.clientWidth;
-	nube.style.left = contenedor.clientWidth + "px";
-	nube.style.bottom = minNubeY + Math.random() * (maxNubeY - minNubeY) + "px";
+	if (score <= 5) {
+		let nube = document.createElement("div");
+		contenedor.appendChild(nube);
+		nube.classList.add("nube");
+		nube.posX = contenedor.clientWidth;
+		nube.style.left = contenedor.clientWidth + "px";
+		nube.style.bottom = minNubeY + Math.random() * (maxNubeY - minNubeY) + "px";
 
-	nubes.push(nube);
-	tiempoHastaNube =
-		tiempoNubeMin + (Math.random() * (tiempoNubeMax - tiempoNubeMin)) / gameVel;
+		nubes.push(nube);
+		tiempoHastaNube =
+			tiempoNubeMin +
+			(Math.random() * (tiempoNubeMax - tiempoNubeMin)) / gameVel;
+	} else {
+	}
 }
 
 function MoverObstaculos() {
@@ -290,50 +332,60 @@ function GanarPuntos() {
 	if (score == 0) {
 		gameVel = 1.25;
 	} else if (score == 5) {
-		gameVel = 1.37;
+		gameVel = 1.3;
 		contenedor.classList.add("mediodia");
 	} else if (score == 10) {
 		gameVel = 1.5;
 		contenedor.classList.add("tarde");
 	} else if (score == 15) {
-		gameVel = 1.75;
+		gameVel = 1.65;
 		contenedor.classList.add("noche");
-	} else if (score == 22) {
+	} else if (score == 20) {
+		gameVel = 1.85;
+		contenedor.classList.remove("noche", "tarde", "mediodia");
+	} else if (score == 27) {
 		gameVel = 2;
-		contenedor.classList.remove("noche", "tarde", "mediodia");
-	} else if (score == 30) {
-		gameVel = 2.5;
 		contenedor.classList.add("mediodia");
-	} else if (score == 37) {
-		gameVel = 3;
+	} else if (score == 34) {
+		gameVel = 2.3;
 		contenedor.classList.add("tarde");
-	} else if (score == 45) {
-		gameVel = 3.5;
+	} else if (score == 41) {
+		gameVel = 2.6;
 		contenedor.classList.add("noche");
-	} else if (score == 60) {
-		gameVel = 4;
+	} else if (score == 48) {
+		gameVel = 3;
 		contenedor.classList.remove("noche", "tarde", "mediodia");
-	} else if (score == 80) {
-		gameVel = 5;
+	} else if (score == 55) {
+		gameVel = 3.5;
 		contenedor.classList.add("mediodia");
+	} else if (score == 65) {
+		contenedor.classList.add("tarde");
+	} else if (score == 75) {
+		gameVel = 4;
+		contenedor.classList.add("noche");
+	} else if (score == 85) {
+		contenedor.classList.remove("noche", "tarde", "mediodia");
+	} else if (score == 100) {
+		contenedor.classList.add("caos");
+		gameVel = 5;
+	} else if (score == 120) {
+		contenedor.classList.add("recaos");
+	} else if (score == 150) {
+		contenedor.classList.add("death");
+	} else if (score == 200) {
+		gameVel = 6;
+
+		suelo.style.animationDuration = 3 / gameVel + "s";
 	}
-	suelo.style.animationDuration = 3 / gameVel + "s";
 }
 
-function GameOver() {
-	Estrellarse();
-
-	gameOver.style.display = "block";
-	gameReload.style.display = "block";
-	if (Estrellarse() === true) {
-		console.log("GameOver");
-	}
-}
+// Logicas de colisión
 
 function Estrellarse() {
 	chicken.classList.remove("chicken-running");
 	chicken.classList.add("chicken-estrellado");
 	parado = true;
+	console.log("Estrellarse called");
 }
 
 function DetectarColision() {
@@ -343,8 +395,7 @@ function DetectarColision() {
 			break; //al estar en orden, no puede chocar con más
 		} else {
 			if (IsCollision(chicken, obstaculos[i], 10, 30, 15, 20)) {
-				GameOver()
-				pausarMusica();
+				GameOver();
 			}
 		}
 	}
@@ -369,6 +420,68 @@ function IsCollision(
 	);
 }
 
+//
+
+function GameOver() {
+	Estrellarse();
+	pausarMusica();
+	document.addEventListener("keydown", function (event) {
+		if (event.keyCode === 32) {
+			GameReload();
+		}
+	});
+	gameOver.style.display = "block";
+	gameReload.style.display = "block";
+	muteButton.style.display = "none";
+	epicBanner.style.display = "none";
+}
+
 function GameReload() {
-	Init();
+	//reiniciar la aplicación
+	location.reload(true);
+	/* 	console.log("GameReload called");
+	sueloY = 32;
+	velY = 0;
+	chickenPosX = 125;
+	chickenPosY = sueloY;
+	sueloX = 0;
+	velEscenario = 1280 / 3;
+	gameVel = 1;
+	score = 0;
+	parado = false;
+	saltando = false;
+	tiempoHastaObstaculo = 2;
+	tiempoHastaNube = 0.5;
+
+
+	scoreContainer = document.querySelector(".scoreContainer");
+	scoreContainer.style.display = "none";
+	// Eliminar obstácu los y nubes existentes
+	for (let i = 0; i < obstaculos.length; i++) {
+		obstaculos[i].parentNode.removeChild(obstaculos[i]);
+	}
+	obstaculos = [];
+
+	for (let i = 0; i < nubes.length; i++) {
+		nubes[i].parentNode.removeChild(nubes[i]);
+	}
+	nubes = [];
+
+	// Restablecer tiempo
+	time = new Date();
+	deltaTime = 0;
+
+	// Ocultar elementos de Game Over
+	gameOver.style.display = "none";
+	gameReload.style.display = "none";
+
+	// Ocultar a la gallina
+	chicken = document.querySelector(".chicken");
+	chicken.style.display = "none";
+
+	// Volver a la pantalla de inicio
+	startGame = false;
+	parado = true;
+	pantallaInicio.style.display = "block";
+	pantallaInicio.style.position = "absolute"; */
 }

@@ -19,10 +19,13 @@ body {
 
 }
 
+
+ /********** Estilos Pantalla de Inicio **********/
+
 .start-screen {
     display: none;
     z-index: 9;
-    background-color: #0c001349;
+    background-color: #0c0013bb;
     width: 100%;
     height: 100%;
 }
@@ -38,7 +41,8 @@ body {
 
 .start-screen-container h1 {
     font-family: var(--H-style);
-    font-size: 70px;
+    font-size: max(min(10vw, 90px), 50px);
+    text-align: center;
     color: #fff;
     text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
 }
@@ -48,7 +52,7 @@ body {
     border: 0;
     margin-top: 50px;
     border-radius: 15px;
-    font-size: 50px;
+    font-size: max(min(6vw, 40px), 25px);
     font-family: var(--H-style);
     color: greenyellow;
     cursor: pointer;
@@ -56,9 +60,13 @@ body {
 }
 
 .start-button:hover {
-    transform: scale(2);
+    transform: scale(1.33);
     color: #ffd755;
 }
+ 
+
+
+ /********** Estilos del juego **********/
 
 .contenedor {
     display: block;
@@ -93,6 +101,7 @@ body {
 }
 
 #boton-Mute {
+    display: none;
     align-self: first baseline;
     grid-column: 3;
     text-align: right;
@@ -103,6 +112,14 @@ body {
     background-color: #00000000;
     border: none;
     cursor: pointer;
+}
+
+#boton-Mute:hover {
+    color: rgba(53, 239, 47);
+}
+
+#boton-Mute:focus {
+    color: rgba(255, 255, 255, 0.624);
 }
 
 .score {
@@ -128,6 +145,21 @@ body {
 
 .noche {
     background-color: #02000f;
+}
+
+.caos {
+    background-image: url("/assets/img/Hell.gif");
+    background-size:cover;
+}
+
+.recaos {
+    background-image: url("/assets/img/HeElmo.gif");
+    background-size:cover;
+}
+
+.death{
+    background-image: url("/assets/img/HeElmo.gif");
+    background-size:cover;
 }
 
 .chicken {
@@ -221,6 +253,10 @@ body {
     background: url("/assets/img/nube.png") no-repeat;
     background-size: 92px 26px;
 }
+
+
+
+ /********** Estilos pantalla de Game Over **********/
 
 .game-over {
     display: none;
