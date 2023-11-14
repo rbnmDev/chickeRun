@@ -369,8 +369,10 @@ function GanarPuntos() {
 		contenedor.classList.add("caos");
 		gameVel = 5;
 	} else if (score == 120) {
+		contenedor.classList.remove("caos");
 		contenedor.classList.add("recaos");
 	} else if (score == 150) {
+		contenedor.classList.remove("recaos");
 		contenedor.classList.add("death");
 	} else if (score == 200) {
 		gameVel = 6;

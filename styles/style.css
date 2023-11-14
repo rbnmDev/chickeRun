@@ -149,16 +149,19 @@ body {
 
 .caos {
     background-image: url("/assets/img/Hell.gif");
+    background-position: center;
     background-size:cover;
 }
 
 .recaos {
     background-image: url("/assets/img/HeElmo.gif");
+    background-position: center;
     background-size:cover;
 }
 
 .death{
-    background-image: url("/assets/img/HeElmo.gif");
+    background-image: url("/assets/img/backGif1.gif");
+    background-position: center;
     background-size:cover;
 }
 
