@@ -25,9 +25,16 @@ body {
 .start-screen {
     display: none;
     z-index: 9;
-    background-color: #0c001336;
     width: 100%;
     height: 100%;
+    max-width: 1280px;
+    max-height: 600px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    overflow: hidden;
 }
 
 .start-screen-container {
@@ -111,7 +118,8 @@ body {
 }
 
 #boton-Mute:focus {
-    color: rgba(255, 255, 255, 0.624);
+    color: rgba(255, 102, 0, 0.624);
+    text-shadow: none;
 }
 
 .score {
@@ -258,8 +266,16 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    max-width: 1280px;
+    max-height: 600px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    overflow: hidden;
     z-index: 5;
-    background: #14003eb1;
+    background: #00000066;
     backdrop-filter: blur(10px);
 }
 

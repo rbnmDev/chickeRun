@@ -43,6 +43,8 @@ let muteButton;
 let pantallaInicio;
 let botonInicio;
 
+let music = false;
+
 let gameOver;
 let gameReload;
 let countDownTimer;
@@ -163,14 +165,16 @@ function Update() {
 // Configuración del audio
 
 const audio = document.getElementById("chicken-sound");
+
 function reproducirMusica() {
 	audio.volume = 0.25;
 	audio.play();
 }
 function pausarMusica() {
+	muteButton.innerText = "Muted";
 	audio.pause();
 }
-document.getElementById("boton-Mute").addEventListener("click", pausarMusica);
+
 
 // Lógicas de funciones del juego
 
