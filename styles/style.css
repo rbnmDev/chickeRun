@@ -61,7 +61,7 @@ body {
 
 .start-button:hover {
     transform: scale(1.33);
-    color: #ffd755;
+    color: #fffb00;
 }
  
 
@@ -95,8 +95,8 @@ body {
 .scoreContainer h2 {
     font-family: var(--H-style);
     font-size: 35px;
-    color: #fff;
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
+    color: #fffb00;
+    text-shadow: 2px 4px 0 rgba(0, 0, 0, 0.75);
 }
 
 #boton-Mute {
@@ -106,8 +106,8 @@ body {
     text-align: right;
     font-family: var(--H-style);
     font-size: 20px;
-    color: #fff;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.9);
+    color: #fffb00;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.75);
     background-color: #00000000;
     border: none;
     cursor: pointer;
@@ -126,8 +126,8 @@ body {
     grid-column: 2;
     font-family: var(--H-style);
     font-size: 100px;
-    color: #fff;
-    text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.9);
+    color: #fffb00;
+    text-shadow: 3px 4px 0 rgba(0, 0, 0, 0.75);
     text-align: center;
 }
 

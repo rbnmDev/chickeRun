@@ -45,7 +45,7 @@ body {
 .cover-screen-container h1 {
     font-family: var(--H-style);
     font-size: max(min(15vw, 200px), 50px);
-    color: #ffd500;
+    color: #fffb00;
     z-index: 1;
     text-shadow: -15px -15px 0 rgb(255, 146, 146), 15px -15px 0 rgb(147, 146, 255), -15px 15px 0 rgb(252, 255, 150), 15px 15px rgb(144, 255, 181);
     margin: 0px;
