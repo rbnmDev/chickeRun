@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="author" content="Ruben Moreno">
+    <meta name="description" content="Chicken running game">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/chickenRun1.png" />
+    <title>Epic Chicken!</title>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+</head>
+
+<body>
+    <audio id="chicken-sound" loop>
+        <source src="/assets/sounds/PhillipGross.mp3" type="audio/mp3">
+    </audio>
+
+
+
+
+    <div class="start-screen">
+        <div class="start-screen-container">
+            <button type="button" name="startButton" onclick="reproducirMusica()" class="start-button">Hold Space to Play</button>
+        </div>
+    </div>
+
+
+
+
+    <div class="contenedor">
+        <div class="suelo"></div>
+        <div class="chicken chicken-running"></div>
+
+
+
+        <div class="scoreContainer">
+
+            <h2 class="epic-banner">Epic Chicken!</h2>
+            <div class="score">0</div>
+            <button id="boton-Mute" onclick="pausarMusica()">Mute Music</button>
+        </div>
+
+
+
+
+    </div>
+    <div class="game-over">
+        <div class="gameover-container">
+            <h3 class="game-over-text">Game Over</h3>
+            <button type="button" name="reloadButton" class="game-reload">More chicken?
+            </button>
+            <h5>or Push jump button to play again</h5>
+            <p>Continue?</p>
+            <div class="count-down">10</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

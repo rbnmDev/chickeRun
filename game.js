@@ -45,6 +45,7 @@ let botonInicio;
 
 let gameOver;
 let gameReload;
+let countDownTimer;
 
 // Configuración de estado de inicio
 
@@ -59,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	pantallaInicio = document.querySelector(".start-screen");
 	botonInicio = document.querySelector(".start-button");
 	contenedor = document.querySelector(".contenedor");
-
 
 	function iniciarJuego() {
 		startGame = true;
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		}
 	});
-}); 
+});
 
 function GameStart() {
 	if (startGame === false) {
@@ -140,6 +140,7 @@ function Start() {
 	gameReload.addEventListener("click", GameReload);
 	muteButton = document.querySelector("#boton-Mute");
 	muteButton.style.display = "block";
+
 	reproducirMusica();
 
 	console.log("Start called");
@@ -422,11 +423,14 @@ function IsCollision(
 	);
 }
 
-//
+// Definir la lógica de Game Over
 
 function GameOver() {
 	Estrellarse();
+	console.log("GAME OVER");
 	pausarMusica();
+	console.log("Music stopped");
+	StartCountDown();
 	document.addEventListener("keydown", function (event) {
 		if (event.keyCode === 32) {
 			GameReload();
@@ -436,6 +440,29 @@ function GameOver() {
 	gameReload.style.display = "block";
 	muteButton.style.display = "none";
 	epicBanner.style.display = "none";
+}
+
+function StartCountDown() {
+	let countDown = 10;
+	countDownTimer = document.querySelector(".count-down");
+
+	function updateCountDown() {
+		countDownTimer.innerText = countDown;
+
+		if (countDown <= 0) {
+			setTimeout(redirectToCover, 1500); //  Redirige cuando el tiempo llega a cero
+		} else {
+			countDown--;
+			setTimeout(updateCountDown, 1000);
+		}
+	}
+
+	// Llama a la función anónima que a su vez llama a updateCountDown
+	setTimeout(updateCountDown, 1000);
+}
+
+function redirectToCover() {
+	window.location.href = "index.html";
 }
 
 function GameReload() {
