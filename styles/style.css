@@ -20,7 +20,9 @@ body {
 }
 
 
- /********** Estilos Pantalla de Inicio **********/
+
+
+/********** Estilos Pantalla de Inicio **********/
 
 .start-screen {
     display: none;
@@ -30,10 +32,9 @@ body {
     max-width: 1280px;
     max-height: 600px;
     margin: 0 auto;
-    position: absolute;
     left: 0;
     right: 0;
-
+    background-color: #ff6955;
     overflow: hidden;
 }
 
@@ -63,17 +64,18 @@ body {
     transform: scale(1.33);
     color: #fffb00;
 }
- 
 
- /********** Estilos del juego **********/
+
+/********** Estilos del juego **********/
 
 .contenedor {
     display: block;
+    overflow-wrap: normal;
     width: 100%;
     height: 100%;
     max-width: 1280px;
     max-height: 600px;
-    margin: 0 auto;
+    margin: auto;
 
     position: relative;
     background: linear-gradient(rgba(209, 247, 255, 0) 20%, #00d0ff90);
@@ -81,6 +83,19 @@ body {
     transition: background-color 9s ease;
 
     overflow: hidden;
+}
+
+
+#jump-button {
+    position: static;
+    top: 50px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 50px;
+    z-index: 20;
+    font-family: var(--H-style);
+    padding: 15px 10px 0px 10px;
+
 }
 
 .scoreContainer {
@@ -150,19 +165,19 @@ body {
 .caos {
     background-image: url("/assets/img/Hell.gif");
     background-position: center;
-    background-size:cover;
+    background-size: cover;
 }
 
 .recaos {
     background-image: url("/assets/img/HeElmo.gif");
     background-position: center;
-    background-size:cover;
+    background-size: cover;
 }
 
-.death{
+.death {
     background-image: url("/assets/img/backGif1.gif");
     background-position: center;
-    background-size:cover;
+    background-size: cover;
 }
 
 .chicken {
@@ -259,7 +274,7 @@ body {
 
 
 
- /********** Estilos pantalla de Game Over **********/
+/********** Estilos pantalla de Game Over **********/
 
 .game-over {
     display: none;

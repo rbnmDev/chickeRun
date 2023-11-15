@@ -105,7 +105,6 @@ function GameStart() {
 
 function Init() {
 	pantallaInicio.style.display = "none";
-	contenedor.style.display = "block";
 
 	startGame = true;
 	parado = false;
@@ -167,7 +166,7 @@ function Update() {
 const audio = document.getElementById("chicken-sound");
 
 function reproducirMusica() {
-	audio.volume = 0.25;
+	audio.volume = 0.15;
 	audio.play();
 }
 function pausarMusica() {

@@ -1,0 +1,19 @@
+{
+  "name": "epicchicken",
+  "version": "1.0.0",
+  "description": "jump chicken jump!",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbnmDev/epicChicken.git"
+  },
+  "author": "Rubén Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbnmDev/epicChicken/issues"
+  },
+  "homepage": "https://github.com/rbnmDev/epicChicken#readme"
+}
