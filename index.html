@@ -15,6 +15,20 @@
 
 <body>
 
+
+    <div class="cover-screen">
+        <div class="cover-screen-container">
+            <h1>Epic Chicken!</h1>
+    
+            <img src="/assets/img/chickenSticker.png" alt="chickenHero" onclick="redirectToGame()">
+            <button type="button" name="coverStartButton" class="cover-start-button"> Push Space to start</button>
+        </div>
+    </div>
+    
+
+
+
+
     <script>
         console.log("Script loaded!");
         function redirectToGame() {
@@ -27,7 +41,6 @@
             coverStartButton.addEventListener("click", redirectToGame);
         }
 
-        // Agregar un escuchador de eventos para la barra espaciadora
         document.addEventListener("keydown", function (event) {
             if (event.code === "Space") {
                 redirectToGame();
