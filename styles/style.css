@@ -96,12 +96,19 @@ body {
     font-size: 40px;
     color: #fff;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.75);
-    background-color: rgb(113, 255, 47);
+    background-color: #71ff2f;
     border-radius: 999px;
+    border: none;
     height: 150px;
     width: 150px;
     cursor: pointer;
 }
+
+#jump-button:hover:focus {
+    background-color: #d2ff2f;
+}
+
+
 
 .scoreContainer {
     z-index: 10;
