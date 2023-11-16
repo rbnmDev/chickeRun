@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="author" content="Ruben Moreno">
+    <meta name="description" content="Chicken running game">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/chickenRun1.png" />
+    <title>Epic Chicken!</title>
+    <link rel="stylesheet" type="text/css" href="/styles/inicio.css">
+
+
+</head>
+
+<body>
+
+<div class="cover-screen">
+    <div class="cover-screen-container">
+        <h1>Epic Chicken!</h1>
+
+        <img src="/assets/img/chickenSticker.png" alt="chickenHero" onclick="redirectToCover()">
+        <button type="button" name="coverStartButton" class="cover-start-button">Esta URL no existe. Pincha al pollo para comenzar</button>
+    </div>
+</div>
+
+
+<script>
+    console.log("Script loaded!");
+    function redirectToCover() {
+        window.location.href = "game.html";
+    }
+
+    // Agregar un escuchador de eventos para el clic en el botón
+    let coverStartButton = document.querySelector(".cover-start-button");
+    if (coverStartButton) {
+        coverStartButton.addEventListener("click", redirectToCover);
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.code === "Space") {
+            redirectToCover();
+        }
+    });
+</script>
+
+</body>
